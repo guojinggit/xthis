@@ -51,6 +51,7 @@ char* replace_space_2(char* str) {
     if (!str)
         return NULL;
 
+    /*注意内存泄漏哦*/
     char* newStr = new char[100];
     char* pStr = newStr;
 
