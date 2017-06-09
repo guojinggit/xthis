@@ -34,6 +34,7 @@ void addToTail(ListNode** header, int value) {
     return;
 }
 
+/*只适用于删除一个节点*/
 void RemoveNode(ListNode** header, int value) {
     if (!(header && *header))
         return;
@@ -67,6 +68,26 @@ void RemoveNode(ListNode** header, int value) {
     return ;
 }
 
+//remonv multi
+void removeMultiNode(ListNode** header, int value) {
+//    if (!header || !*header)
+//        return;
+//
+//    ListNode* node = (*header);
+//    while (node->next) {
+//        if (node->data == value) {
+//
+//        } else if (node->next->data == value){
+//            ListNode* nodeTmp = node->next->next;
+//            delete node->next;
+//            node->next = nodeTmp;
+//            node = node->next;
+//            if (!node)
+//                break;
+//        }
+//    }
+//    return;
+}
 void showList(ListNode** header) {
     if (!(header && *header))
         return;
@@ -78,21 +99,65 @@ void showList(ListNode** header) {
     return;
 }
 
-//题目1，反向打印链表值
+//题目1，反向打印链表值  这是打印
 
 //思路1，顺序遍历，然后放入栈中，然后再打印
 
 //思路2,递归   风险，如果链表非常长，栈空间可能不够用
 
 //注意这里的是地址，不是二级地址
-void reverseList(ListNode* header) {
+void reversePrintList(ListNode* header) {
     if (!header)
         return;
     if (header->next)
-        reverseList(header->next);
+        reversePrintList(header->next);
     std::cout << header->data << std::endl;
 }
 
+//反转链表
+
+
+
+//反转链表
+
+ListNode* reverseList(ListNode* header) {
+
+    ListNode* pRevHeader = NULL;
+    ListNode* pNode = header;
+    ListNode* pPreNode = NULL;
+
+    while (pNode != NULL) {
+        ListNode* pNext = pNode->next;
+        if (pNext != NULL)
+            pRevHeader = pNext;
+
+        pNode->next = pPreNode;
+
+        pPreNode = pNode;
+        pNode = pNext;
+    }
+    return pRevHeader;
+}
+
+
+//listMerge
+
+ListNode* mergeList(ListNode* header1,ListNode* header2){
+    if (header1 == NULL)
+        return header2;
+    else if (header2 == NULL)
+        return header1;
+
+    ListNode* pMergeHeader = NULL;
+    if (header1->data < header2->data) {
+        pMergeHeader = header1;
+        pMergeHeader->next = mergeList(header1->next, header2);
+    } else {
+        pMergeHeader = header2;
+        pMergeHeader->next = mergeList(header1, header2->next);
+    }
+    return pMergeHeader;
+}
 
 int main(){
     ListNode* header = new ListNode();
@@ -101,8 +166,10 @@ int main(){
         addToTail(&header, i);
     }
 
-//    RemoveNode(&header, 2);
-//    showList(&header);
-    reverseList(header);
+    removeMultiNode(&header, 2);
+    showList(&header);
+//    reverseList(header);
+    ListNode* l = reverseList(header);
+    showList(NULL);
     return 0;
 }
