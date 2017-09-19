@@ -29,7 +29,11 @@ int fibonacii_2(unsigned int n){
     }
     return sum;
 }
+
+
+
 int main(){
-    std::cout << fibonacii_2(5) << std::endl;
+    //fibonacii
+    std::cout << fibonacii(5) << std::endl;
     return 0;
 }

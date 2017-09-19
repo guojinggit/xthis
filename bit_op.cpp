@@ -40,7 +40,10 @@ int bit_op_(int data) {
     return count;
 }
 
+
+
 int main(){
 
-    std::cout << bit_op_(-2) << std::endl;
+    std::cout << bit_1(-1) << std::endl;
 }
+
